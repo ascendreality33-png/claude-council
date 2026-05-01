@@ -36,11 +36,16 @@ When the user's message begins with **"agents gather"** followed by an idea or p
 
 **You (the main Claude instance) are the orchestrator.** Subagents cannot spawn subagents, so you must handle all coordination directly.
 
-1. **Discover agents** — Use the Glob tool to list all `.md` files in `.claude/agents/`. Each file is a council member. Read any agent file you haven't seen this session to understand their role.
+1. **Load brand context** — Read `.claude/brand-council.md` before doing anything else. This is the operating memory for the council — mission, values, hard lines, tone, and the final override line. Pass it verbatim inside every agent prompt so each agent reasons from the same context.
 
-2. **Launch all agents in parallel** — Use the Agent tool to invoke every discovered agent simultaneously. Pass the following as the prompt to each:
+2. **Discover agents** — Use the Glob tool to list all `.md` files in `.claude/agents/`. Each file is a council member. Read any agent file you haven't seen this session to understand their role.
+
+3. **Launch all agents in parallel** — Use the Agent tool to invoke every discovered agent simultaneously. Pass the following as the prompt to each:
 
    ```
+   BRAND CONTEXT:
+   [paste the full contents of .claude/brand-council.md verbatim]
+
    COUNCIL SESSION: [paste the user's idea/proposal verbatim]
 
    Structure your response exactly as follows:
@@ -50,11 +55,11 @@ When the user's message begins with **"agents gather"** followed by an idea or p
    **Confidence:** [X/10] — [one sentence justifying this level]
    ```
 
-3. **Collect all responses** — Wait for every agent to complete before proceeding.
+4. **Collect all responses** — Wait for every agent to complete before proceeding.
 
-4. **Write to shared_reasoning.md** — Append a new session block to `shared_reasoning.md` using the format defined below. Create the file if it does not exist.
+5. **Write to shared_reasoning.md** — Append a new session block to `shared_reasoning.md` using the format defined below. Create the file if it does not exist.
 
-5. **Synthesize** — After writing the log, provide a synthesis in the main conversation: areas of agreement, key tensions between agents, and the 1–2 questions the council has surfaced that most need to be resolved before acting.
+6. **Synthesize** — After writing the log, provide a synthesis in the main conversation: areas of agreement, key tensions between agents, and the 1–2 questions the council has surfaced that most need to be resolved before acting.
 
 ### shared_reasoning.md Format
 
