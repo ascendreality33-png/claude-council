@@ -16,6 +16,7 @@ Each agent has its own persistent memory system at `.claude/agent-memory/<agent-
 
 - **optimist-maximalist** (`green`, `sonnet`) — Maps the highest realistic potential of an idea.
 - **devils-advocate** (`red`, `sonnet`) — Stress-tests ideas with grounded skepticism.
+- **neutral-analyst** (`blue`, `sonnet`) — Provides objective, balanced analysis without bias toward optimism or pessimism. Synthesizes trade-offs and reconciles conflicting council perspectives.
 
 New agents added to `.claude/agents/` automatically join future council gatherings — no manual updates required.
 
